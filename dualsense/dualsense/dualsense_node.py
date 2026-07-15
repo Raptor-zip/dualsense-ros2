@@ -74,11 +74,12 @@ class DualSenseNode(Node):
         state = self._ds.state
         dz = self._deadzone
 
-        def axis(raw):
-            centered = raw - 128
-            if abs(centered) <= dz:
+        def axis(v):
+            # pydualsense(>=0.7) は既に中央化した値(-128..127)を返す。
+            # デッドゾーン内は0、範囲外は -1.0〜1.0 に正規化。
+            if abs(v) <= dz:
                 return 0.0
-            return centered / 128.0
+            return max(-1.0, min(1.0, v / 128.0))
 
         msg = Gamepad()
         # Buttons
