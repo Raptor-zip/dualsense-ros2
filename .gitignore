@@ -1,0 +1,11 @@
+# ROS 2 / colcon 生成物
+build/
+install/
+log/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.uv/
+*.egg-info/
